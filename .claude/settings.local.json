@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "sigma-mcp-server"
+  ],
+  "enableAllProjectMcpServers": true
+}
