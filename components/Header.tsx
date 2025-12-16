@@ -1,27 +1,29 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Link from "next/link";
-import { useTheme } from "./ThemeProvider";
-import { MoonIcon, SunIcon, UserIcon } from "./Icons";
-import { LoginModal } from "./LoginModal";
-import { useAuth } from "@/contexts/AuthContext";
+import { useState } from "react"
+import Link from "next/link"
+import { useTheme } from "./ThemeProvider"
+import { MoonIcon, SunIcon, UserIcon } from "./Icons"
+import { LoginModal } from "./LoginModal"
+import { useAuth } from "@/contexts/AuthContext"
 
 export function Header() {
-  const { theme, toggleTheme, mounted } = useTheme();
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const { user, logout, isLoading: authLoading } = useAuth();
+  const { theme, toggleTheme, mounted } = useTheme()
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const { user, logout, isLoading: authLoading } = useAuth()
 
   const handleLogout = () => {
-    logout();
-  };
+    logout()
+  }
 
   return (
     <>
       <header className="flex w-full items-center justify-between">
-        <h1 className="text-[26px] font-bold leading-none text-[var(--logo-color)]">
-          devfinder
-        </h1>
+        <Link href="/">
+          <h1 className="text-[26px] font-bold leading-none text-[var(--logo-color)]">
+            devfinder
+          </h1>
+        </Link>
         <div className="flex items-center gap-4 md:gap-6">
           {!authLoading && (
             <>
@@ -68,7 +70,9 @@ export function Header() {
             <button
               onClick={toggleTheme}
               className="flex items-center gap-3 md:gap-4 group"
-              aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+              aria-label={`Switch to ${
+                theme === "light" ? "dark" : "light"
+              } mode`}
             >
               <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
                 {theme === "light" ? "Dark" : "Light"}
@@ -94,5 +98,5 @@ export function Header() {
         onClose={() => setIsLoginModalOpen(false)}
       />
     </>
-  );
+  )
 }
