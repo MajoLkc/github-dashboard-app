@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useTheme } from "./ThemeProvider";
 import { MoonIcon, SunIcon, UserIcon } from "./Icons";
 import { LoginModal } from "./LoginModal";
@@ -26,7 +27,10 @@ export function Header() {
             <>
               {user ? (
                 <div className="flex items-center gap-3 md:gap-4">
-                  <div className="flex items-center gap-2">
+                  <Link
+                    href="/profile"
+                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                  >
                     <img
                       src={user.avatar_url}
                       alt={user.login}
@@ -35,7 +39,7 @@ export function Header() {
                     <span className="hidden md:block text-[13px] font-bold text-[var(--text-primary)]">
                       {user.login}
                     </span>
-                  </div>
+                  </Link>
                   <button
                     onClick={handleLogout}
                     className="flex items-center gap-2 md:gap-3 group"
