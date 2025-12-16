@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neutral Colors - Light Theme */
+  --neutral-900: #141D2F;
+  --neutral-800: #1E2A47;
+  --neutral-700: #2B3442;
+  --neutral-500: #4B6A9B;
+  --neutral-300: #697C9A;
+  --neutral-200: #90A4D4;
+  --neutral-100: #F6F8FF;
+  --neutral-0: #FFFFFF;
+
+  /* Blue Colors */
+  --blue-500: #0079FF;
+  --blue-300: #60ABFF;
+
+  /* Red Colors */
+  --red-500: #F74646;
+
+  /* Light Theme Variables */
+  --background: var(--neutral-100);
+  --card-bg: var(--neutral-0);
+  --stats-bg: var(--neutral-100);
+  --text-primary: var(--neutral-700);
+  --text-secondary: var(--neutral-500);
+  --text-muted: var(--neutral-300);
+  --logo-color: var(--neutral-900);
+  --link-color: var(--blue-500);
+  --toggle-text: var(--neutral-500);
+  --toggle-icon: var(--neutral-500);
+  --search-placeholder: var(--neutral-500);
+  --search-icon: var(--blue-500);
+  --shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.2);
+}
+
+[data-theme="dark"] {
+  /* Dark Theme Variables */
+  --background: var(--neutral-900);
+  --card-bg: var(--neutral-800);
+  --stats-bg: var(--neutral-900);
+  --text-primary: var(--neutral-0);
+  --text-secondary: var(--neutral-0);
+  --text-muted: var(--neutral-200);
+  --logo-color: var(--neutral-0);
+  --link-color: var(--blue-300);
+  --toggle-text: var(--neutral-200);
+  --toggle-icon: var(--neutral-200);
+  --search-placeholder: var(--neutral-0);
+  --search-icon: var(--blue-300);
+  --shadow: none;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card-bg: var(--card-bg);
+  --color-stats-bg: var(--stats-bg);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-logo: var(--logo-color);
+  --color-link: var(--link-color);
+  --color-toggle-text: var(--toggle-text);
+  --color-toggle-icon: var(--toggle-icon);
+  --color-search-placeholder: var(--search-placeholder);
+  --color-search-icon: var(--search-icon);
+  --color-blue-500: var(--blue-500);
+  --color-blue-300: var(--blue-300);
+  --color-red-500: var(--red-500);
+  --color-neutral-0: var(--neutral-0);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --font-mono: var(--font-space-mono);
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-primary);
+  font-family: var(--font-space-mono), monospace;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
