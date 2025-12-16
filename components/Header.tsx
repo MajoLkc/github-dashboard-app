@@ -4,10 +4,16 @@ import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import { MoonIcon, SunIcon, UserIcon } from "./Icons";
 import { LoginModal } from "./LoginModal";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function Header() {
   const { theme, toggleTheme, mounted } = useTheme();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const { user, logout, isLoading: authLoading } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <>
@@ -16,16 +22,44 @@ export function Header() {
           devfinder
         </h1>
         <div className="flex items-center gap-4 md:gap-6">
-          <button
-            onClick={() => setIsLoginModalOpen(true)}
-            className="flex items-center gap-2 md:gap-3 group"
-            aria-label="Open login modal"
-          >
-            <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
-              Login
-            </span>
-            <UserIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
-          </button>
+          {!authLoading && (
+            <>
+              {user ? (
+                <div className="flex items-center gap-3 md:gap-4">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={user.avatar_url}
+                      alt={user.login}
+                      className="w-8 h-8 rounded-full"
+                    />
+                    <span className="hidden md:block text-[13px] font-bold text-[var(--text-primary)]">
+                      {user.login}
+                    </span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 md:gap-3 group"
+                    aria-label="Logout"
+                  >
+                    <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
+                      Logout
+                    </span>
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setIsLoginModalOpen(true)}
+                  className="flex items-center gap-2 md:gap-3 group"
+                  aria-label="Open login modal"
+                >
+                  <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
+                    Login
+                  </span>
+                  <UserIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
+                </button>
+              )}
+            </>
+          )}
           {mounted ? (
             <button
               onClick={toggleTheme}
