@@ -1,12 +1,34 @@
 "use client"
 
-import { useState } from "react"
+import { useState, ReactNode } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "./ThemeProvider"
-import { MoonIcon, SunIcon, UserIcon } from "./Icons"
+import { MoonIcon, SunIcon, UserIcon, LogoutIcon } from "./Icons"
 import { LoginModal } from "./LoginModal"
 import { useAuth } from "@/contexts/AuthContext"
+
+interface AuthButtonProps {
+  onClick: () => void
+  label: string
+  ariaLabel: string
+  icon?: ReactNode
+}
+
+function AuthButton({ onClick, label, ariaLabel, icon }: AuthButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex items-center gap-2 md:gap-3 group cursor-pointer"
+      aria-label={ariaLabel}
+    >
+      <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
+        {label}
+      </span>
+      {icon}
+    </button>
+  )
+}
 
 export function Header() {
   const { theme, toggleTheme, mounted } = useTheme()
@@ -15,6 +37,10 @@ export function Header() {
 
   const handleLogout = () => {
     logout()
+  }
+
+  const handleLogin = () => {
+    setIsLoginModalOpen(true)
   }
 
   return (
@@ -45,27 +71,24 @@ export function Header() {
                       {user.login}
                     </span>
                   </Link>
-                  <button
+                  <AuthButton
                     onClick={handleLogout}
-                    className="flex items-center gap-2 md:gap-3 group"
-                    aria-label="Logout"
-                  >
-                    <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
-                      Logout
-                    </span>
-                  </button>
+                    label="Logout"
+                    ariaLabel="Logout"
+                    icon={
+                      <LogoutIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
+                    }
+                  />
                 </div>
               ) : (
-                <button
-                  onClick={() => setIsLoginModalOpen(true)}
-                  className="flex items-center gap-2 md:gap-3 group"
-                  aria-label="Open login modal"
-                >
-                  <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
-                    Login
-                  </span>
-                  <UserIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
-                </button>
+                <AuthButton
+                  onClick={handleLogin}
+                  label="Login"
+                  ariaLabel="Open login modal"
+                  icon={
+                    <UserIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
+                  }
+                />
               )}
             </>
           )}
