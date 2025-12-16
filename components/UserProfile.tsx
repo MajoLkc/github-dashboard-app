@@ -76,9 +76,9 @@ export function UserProfile({ user }: UserProfileProps) {
           <Image
             src={user.avatar_url}
             alt={`${user.login}'s avatar`}
-            width={70}
-            height={70}
-            className="rounded-full md:w-[117px] md:h-[117px]"
+            width={117}
+            height={117}
+            className="rounded-full w-[70px] h-[70px] md:w-[117px] md:h-[117px] object-cover shrink-0"
           />
           <div className="flex flex-1 flex-col gap-1">
             <h1 className="text-[16px] md:text-[26px] font-bold leading-[1.2] text-[var(--text-primary)]">
@@ -172,7 +172,7 @@ export function UserProfile({ user }: UserProfileProps) {
           alt={`${user.login}'s avatar`}
           width={117}
           height={117}
-          className="rounded-full shrink-0"
+          className="rounded-full w-[117px] h-[117px] object-cover shrink-0"
         />
         <div className="flex flex-1 flex-col gap-6">
           {/* Header */}
