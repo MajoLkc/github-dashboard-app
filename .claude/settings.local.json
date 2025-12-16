@@ -1,6 +1,13 @@
 {
+  "permissions": {
+    "allow": [
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_screenshot",
+      "mcp__figma__get_metadata"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "sigma-mcp-server"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }
