@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useTheme } from "./ThemeProvider"
 import { MoonIcon, SunIcon, UserIcon } from "./Icons"
 import { LoginModal } from "./LoginModal"
@@ -33,10 +34,12 @@ export function Header() {
                     href="/profile"
                     className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                   >
-                    <img
+                    <Image
                       src={user.avatar_url}
                       alt={user.login}
-                      className="w-8 h-8 rounded-full"
+                      width={32}
+                      height={32}
+                      className="rounded-full"
                     />
                     <span className="hidden md:block text-[13px] font-bold text-[var(--text-primary)]">
                       {user.login}

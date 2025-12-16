@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Header } from "@/components";
 import { useAuth } from "@/contexts/AuthContext";
 import { GitHubUser } from "@/types/github";
@@ -95,9 +96,11 @@ export default function ProfilePage() {
         <div className="w-full rounded-[15px] bg-[var(--card-bg)] p-6 md:p-10 lg:p-12 shadow-[var(--shadow)]">
           <div className="flex flex-col md:flex-row gap-6 md:gap-10">
             <div className="flex-shrink-0">
-              <img
+              <Image
                 src={authUser.avatar_url}
                 alt={authUser.login}
+                width={117}
+                height={117}
                 className="w-[70px] h-[70px] md:w-[117px] md:h-[117px] rounded-full"
               />
             </div>
