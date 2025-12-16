@@ -188,3 +188,25 @@ export function CompanyIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+export function UserIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10Z"
+        fill="currentColor"
+      />
+      <path
+        d="M10 11.667C5.8575 11.667 2.5 14.1045 2.5 17.0837C2.5 17.3145 2.68583 17.5003 2.91667 17.5003H17.0833C17.3142 17.5003 17.5 17.3145 17.5 17.0837C17.5 14.1045 14.1425 11.667 10 11.667Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}

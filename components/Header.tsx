@@ -1,39 +1,60 @@
 "use client";
 
+import { useState } from "react";
 import { useTheme } from "./ThemeProvider";
-import { MoonIcon, SunIcon } from "./Icons";
+import { MoonIcon, SunIcon, UserIcon } from "./Icons";
+import { LoginModal } from "./LoginModal";
 
 export function Header() {
   const { theme, toggleTheme, mounted } = useTheme();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   return (
-    <header className="flex w-full items-center justify-between">
-      <h1 className="text-[26px] font-bold leading-none text-[var(--logo-color)]">
-        devfinder
-      </h1>
-      {mounted ? (
-        <button
-          onClick={toggleTheme}
-          className="flex items-center gap-3 md:gap-4 group"
-          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-        >
-          <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
-            {theme === "light" ? "Dark" : "Light"}
-          </span>
-          {theme === "light" ? (
-            <MoonIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
+    <>
+      <header className="flex w-full items-center justify-between">
+        <h1 className="text-[26px] font-bold leading-none text-[var(--logo-color)]">
+          devfinder
+        </h1>
+        <div className="flex items-center gap-4 md:gap-6">
+          <button
+            onClick={() => setIsLoginModalOpen(true)}
+            className="flex items-center gap-2 md:gap-3 group"
+            aria-label="Open login modal"
+          >
+            <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
+              Login
+            </span>
+            <UserIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
+          </button>
+          {mounted ? (
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-3 md:gap-4 group"
+              aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            >
+              <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)] group-hover:text-[var(--text-primary)]">
+                {theme === "light" ? "Dark" : "Light"}
+              </span>
+              {theme === "light" ? (
+                <MoonIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
+              ) : (
+                <SunIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
+              )}
+            </button>
           ) : (
-            <SunIcon className="w-5 h-5 text-[var(--toggle-icon)] group-hover:text-[var(--text-primary)]" />
+            <div className="flex items-center gap-3 md:gap-4">
+              <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)]">
+                Dark
+              </span>
+              <MoonIcon className="w-5 h-5 text-[var(--toggle-icon)]" />
+            </div>
           )}
-        </button>
-      ) : (
-        <div className="flex items-center gap-3 md:gap-4">
-          <span className="text-[13px] font-bold uppercase leading-[1.4] tracking-[2.5px] text-[var(--toggle-text)]">
-            Dark
-          </span>
-          <MoonIcon className="w-5 h-5 text-[var(--toggle-icon)]" />
         </div>
-      )}
-    </header>
+      </header>
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
+    </>
   );
 }
