@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AppWrapper } from "@/components/AppWrapper";
 
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${spaceMono.variable} antialiased`} suppressHydrationWarning>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <AppWrapper>{children}</AppWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );
